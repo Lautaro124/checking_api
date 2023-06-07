@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+  web:
+    build: ./client
+    ports:
+      - 3000:3000
+    volumes:
+      - ./client:/usr/src/client
+    links:
+      - api
+  api:
+    build: ./api
+    ports:
+      - 80:80
+    volumes:
+      - ./api:/usr/src/api
+    links:
+      - db
+  db:
+    container_name: db
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+      PGDATA: var/lib/postgresql/data/pgdata
+    volumes:
+      - ./db:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
