@@ -3,10 +3,12 @@ version: '3'
 services:
   web:
     build: ./client
+    env_file:
+      - ./client/.env.local
     ports:
       - 3000:3000
     volumes:
-      - ./client:/usr/src/client
+      - ./client:/app
     links:
       - api
   api:
@@ -14,7 +16,7 @@ services:
     ports:
       - 80:80
     volumes:
-      - ./api:/usr/src/api
+      - ./api:/app
     links:
       - db
   db:

@@ -1,10 +1,10 @@
 FROM python:3.8.10-slim
 
-WORKDIR /api
+WORKDIR /app
 
-COPY ./requirements.txt /api/requirements.txt
+COPY ./requirements.txt /app/requirements.txt
 
-COPY ./app /api
+COPY ./app /app
 
 RUN pip install -r requirements.txt
 
