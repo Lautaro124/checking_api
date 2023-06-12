@@ -1,7 +1,18 @@
-from fastapi import APIRouter
-
+from fastapi import APIRouter, HTTPException
+from ...utils.auth import authenticate_user, verify_token
 router = APIRouter()
 
-@router.get("/")
-async def root():
-  return {"message": "Hello World"}
+@router.post("/login")
+async def login(email: str):
+  user_id = authenticate_user(email)
+  if user_id is None:
+    return HTTPException(status_code=403, detail="User does not exist")
+  return { 'userId': user_id }
+
+@router.post("/authToken")
+def auth_token(token: str):
+  token_verificed = verify_token(token)
+  print(token_verificed)
+  if not token_verificed:
+    return HTTPException(status_code=403, detail="Token does not exist")
+  return { 'verified': True }

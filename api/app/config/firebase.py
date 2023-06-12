@@ -1,5 +1,5 @@
 import firebase_admin
-from firebase_admin import credentials, auth
+from firebase_admin import credentials
 
-credential = credentials.Certificate('../checking-ce4a3-7c0d2df60772.json')
-firebase_admin.initialize_app(credential=credential)
+credential = credentials.Certificate('app/config/credentials.json')
+firebase_app = firebase_admin.initialize_app(credential=credential)
