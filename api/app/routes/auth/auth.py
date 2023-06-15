@@ -21,3 +21,7 @@ def auth_token(token: str):
 @router.post("/logout", dependencies=[Depends(HTTPAuthentication())])
 def logout():
   return { 'logout': True }
+
+@router.get("/user")
+def test():
+ return "hello world"  
