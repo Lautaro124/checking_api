@@ -1,5 +1,6 @@
 from fastapi import APIRouter
 
+
 router=APIRouter()
 company=[
     {
@@ -28,3 +29,8 @@ async def add_company(name:str):
   }
   company.append(new_company)
   return new_company
+
+@router.get('/search')
+async def search_companies(name: str):
+    matching_companies = [c for c in company if name.lower() in c['name'].lower()]
+    return matching_companies
