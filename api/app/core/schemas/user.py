@@ -1,4 +1,5 @@
-from sqlalchemy import Column, Integer, String, Boolean
+from sqlalchemy import Column, Integer, String, Boolean, ForeignKey
+from sqlalchemy.orm import relationship
 from ..db.database import Base
 
 class User(Base):
@@ -11,3 +12,6 @@ class User(Base):
   password = Column(String, nullable=True)
   is_active = Column(Boolean, default=True)
   is_superuser = Column(Boolean, default=False)
+  company_id = Column(Integer, ForeignKey('companies.id'))
+  company = relationship('Company', back_populates='employees')
+  companies = relationship('Company', back_populates='owner')
