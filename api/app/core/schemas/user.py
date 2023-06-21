@@ -12,7 +12,8 @@ class User(Base):
   password = Column(String, nullable=True)
   is_active = Column(Boolean, default=True)
   is_superuser = Column(Boolean, default=False)
-  company_id = Column(Integer, ForeignKey("companys.id"))
-  company = relationship("Companys", back_populates="companys")
-  type_user_id = Column(Integer, ForeignKey("tipe_users.id"))
-  tipe_user = relationship("TipeUser", back_populates="user")
+  company_id = Column(Integer, ForeignKey("companys.id", ondelete="SET NULL"), nullable=True)
+  type_user_id = Column(Integer, ForeignKey("type_users.id", ondelete="SET NULL"), nullable=True, unique=True)
+
+  company = relationship("Company", back_populates="users", uselist=False)
+  type_user = relationship("TypeUser", back_populates="user", uselist=False)

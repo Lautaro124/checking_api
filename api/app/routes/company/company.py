@@ -1,30 +1,25 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
+from sqlalchemy.orm import Session
+
+from app.core.schemas.user import User
+from ...config.dependences import get_db
+from ...core.schemas.companys import Company
 
 router=APIRouter()
-company=[
-    {
-      "id":"1",
-      "name":"caca"
-    }
-]
 
 @router.get('/')
-async def companys():
-  return company
-
-
-@router.get('/{id}')
-async def company_id(id: str):
-    for c in company:
-        if c['id'] == id:
-            return c
-    return {"message": "Company not found"}
+async def get_all_companys(db: Session = Depends(get_db)):
+  return db.query(Company).all()
 
 @router.post('/')
-async def add_company(name:str):
-  new_company={
-    "id": str(len(company) + 1),
-    'name': name
-  }
-  company.append(new_company)
-  return new_company
+async def add_company(
+    name:str, 
+    description: str,
+    db: Session = Depends(get_db),
+  ):
+  user_id = db.query(User).first()
+  company = Company(name=name, description=description, users=[user_id])
+  db.add(company)
+  db.commit()
+  db.refresh(company)
+  return company
