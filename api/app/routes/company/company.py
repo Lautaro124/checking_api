@@ -1,9 +1,8 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 
 from app.controller.company import create_company, get_companys
 from app.controller.user import get_user_by_id
-from app.core.schemas.user import User
 from app.config.dependences import get_db
 from app.core.schemas.companys import Company
 
@@ -11,8 +10,11 @@ router=APIRouter()
 
 @router.get('/')
 async def get_all_companys(db: Session = Depends(get_db)):
-  companys = get_companys(db)
-  return companys
+  try:
+    companys = get_companys(db)
+    return companys
+  except Exception as e:
+    raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(e))
 
 @router.post('/')
 async def add_company(
@@ -27,4 +29,4 @@ async def add_company(
     create_company(company, db)
     return company
   except Exception as e:
-    raise HTTPException(status_code=400, detail=str(e))
+    raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(e))

@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 
 from app.controller.company import get_company_by_id
@@ -19,7 +19,7 @@ async def login(email: str, password: str, db: Session = Depends(get_db)):
     else:
       raise Exception('Unaiuthorized user')
   except Exception as e:
-    raise HTTPException(status_code=401, detail=str(e))
+    raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail=str(e))
 
 @router.post('/')
 async def register(
@@ -48,4 +48,4 @@ async def register(
     db_user = create_user(user, db)
     return db_user
   except Exception as e:
-    raise HTTPException(status_code=400, detail=str(e))
+    raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(e))
