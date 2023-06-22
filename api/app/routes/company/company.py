@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
-from app.controller.company import create_company
+from app.controller.company import create_company, get_companys
 from app.controller.user import get_user_by_id
 from app.core.schemas.user import User
 from app.config.dependences import get_db
@@ -11,7 +11,7 @@ router=APIRouter()
 
 @router.get('/')
 async def get_all_companys(db: Session = Depends(get_db)):
-  companys = get_all_companys(db)
+  companys = get_companys(db)
   return companys
 
 @router.post('/')

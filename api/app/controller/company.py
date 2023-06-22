@@ -2,7 +2,7 @@ from app.core.schemas.companys import Company
 from app.core.schemas.user import User
 from sqlalchemy.orm import Session
 
-def get_all_companys(db: Session):
+def get_companys(db: Session):
   return db.query(Company).all()
 
 def get_company_by_id(id: int, db: Session):
