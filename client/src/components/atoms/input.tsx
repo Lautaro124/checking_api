@@ -1,5 +1,7 @@
+import { type InputTypeProp } from '~/interface/inputType'
+
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  styleProp: 'line' | 'bordered'
+  styleProp: InputTypeProp
 }
 const Input = ({ styleProp, ...restOfProps }: InputProps) => {
   const className = styleProp === 'line'
