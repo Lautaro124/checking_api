@@ -29,17 +29,15 @@ export default function Home() {
   }
 
   return (
-    <body className="flex flex-col items-center justify-center min-h-screen py-2">
-      <main className="flex min-h-screen flex-col items-center justify-between p-24">
-        <h1>Login</h1>
-        <InpitWithLabel label='Email' id='Email' type='email' />
-        <button
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-          onClick={loginWihtGoogle}
-        >
-          Login with Google
-        </button>
-      </main>
-    </body>
+    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+      <h1>Login</h1>
+      <InpitWithLabel label='Email' id='Email' type='email' />
+      <button
+        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        onClick={loginWihtGoogle}
+      >
+        Login with Google
+      </button>
+    </main>
   )
 }
