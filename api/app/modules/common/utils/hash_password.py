@@ -1,4 +1,4 @@
-from app.config.dependences import pwd_context
+from app.modules.common.config.dependences import pwd_context
 
 def hash_password(password: str):
   return pwd_context.hash(password)

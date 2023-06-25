@@ -1,10 +1,10 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
-
-from app.controller.company import create_company, get_companys
-from app.controller.user import get_user_by_id
-from app.config.dependences import get_db
 from app.core.schemas.companys import Company
+
+from app.modules.common.config.dependences import get_db
+from app.modules.common.controller.company import create_company, get_companys
+from app.modules.common.controller.user import get_user_by_id
 
 router=APIRouter()
 
