@@ -6,7 +6,7 @@ import Form from '~/components/organisms/forms'
 
 const CreateCompanyPage = () => {
   return (
-    <section className='p-3 mt-16'>
+    <section className='p-3 mt-16 '>
       <Form title="Create your company" submitText="Create company">
         <InputWithLabel
           id="comapy"
