@@ -6,7 +6,7 @@ interface LabelProps extends React.LabelHTMLAttributes<HTMLLabelElement> {
 const Label = ({ children, label, ...restOfProps }: LabelProps) => {
   return (
     <label
-      className="block text-gray-700 text-sm font-bold mb-2 flex flex-col"
+      className="text-gray-700 text-sm font-bold mb-2 flex flex-col"
       {...restOfProps}
     >
       {label}

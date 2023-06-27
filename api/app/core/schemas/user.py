@@ -17,3 +17,4 @@ class User(Base):
 
   company = relationship("Company", back_populates="users", uselist=False)
   type_user = relationship("TypeUser", back_populates="user", uselist=False)
+  init_register = relationship("InitRegister", back_populates="user", uselist=False)

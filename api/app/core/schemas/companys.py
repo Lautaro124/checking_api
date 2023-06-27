@@ -9,4 +9,4 @@ class Company(Base):
   name = Column(String, unique=True)
   description = Column(String)
  
-  users = relationship("User", back_populates="company")
+  users = relationship("User", back_populates="company", nullable=True)

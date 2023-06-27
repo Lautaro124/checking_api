@@ -4,19 +4,16 @@ import { type InputTypeProp } from '~/interface/inputType'
 
 export interface InputWithLabelProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label: string
-  id: string
   inputType?: InputTypeProp
 }
 
-const InpitWithLabel = ({ id, label, ...restOfProps }: InputWithLabelProps) => {
+const InpitWithLabel = ({ inputType, label, ...restOfProps }: InputWithLabelProps) => {
   return (
     <Label
       label={label}
-      htmlFor={id}
     >
       <Input
-        styleProp='line'
-        id={id}
+        styleProp={inputType}
         {...restOfProps}
       />
     </Label>

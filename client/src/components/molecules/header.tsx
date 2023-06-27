@@ -8,7 +8,7 @@ interface HeaderProps {
 
 const Header = ({ title, children }: HeaderProps) => {
   return (
-    <header className='flex'>
+    <header className='flex justify-between bg-slate-600 p-2 py-4'>
       <Title text={title} />
       {children}
     </header>
