@@ -17,13 +17,12 @@ const Input = ({ styleProp, error, validate, ...restOfProps }: InputProps) => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
 
-    // Validar el valor si se proporciona una función de validación
     if (validate) {
       const validationError = validate(value);
       setErrorMessage(validationError);
     }
 
-    // Actualizar el valor
+
     restOfProps.onChange?.(event);
   };
 

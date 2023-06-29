@@ -16,17 +16,16 @@ const CreateUser = () => {
 
     const errors: { [key: string]: string } = {};
 
-    // Validar nombre (solo letras)
+
     if (!/^[a-zA-Z]+$/.test(userName)) {
       errors.userName = 'El nombre solo debe contener letras';
     }
 
-    // Validar email
     if (!/\S+@\S+\.\S+/.test(email)) {
       errors.email = 'Ingrese un email válido';
     }
 
-    // Validar contraseña (caracter especial)
+
     if (!/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
       errors.password = 'La contraseña debe contener al menos un caracter especial';
     }
@@ -34,8 +33,8 @@ const CreateUser = () => {
     setErrors(errors);
 
     if (Object.keys(errors).length === 0) {
-      // Enviar el formulario o redirigir a una nueva página
-      // ...
+      // Enviar el formulario
+      
     }
   };
 
