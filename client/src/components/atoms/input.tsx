@@ -1,17 +1,38 @@
-import { type InputTypeProp } from '~/interface/inputType'
+import { type InputTypeProp } from '~/interface/inputType';
+import React, { useState } from 'react';
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  styleProp?: InputTypeProp
+  styleProp?: InputTypeProp;
+  error?: string;
+  validate?: (value: string) => string | undefined;
 }
-const Input = ({ styleProp, ...restOfProps }: InputProps) => {
+
+const Input = ({ styleProp, error, validate, ...restOfProps }: InputProps) => {
+  const [errorMessage, setErrorMessage] = useState<string | undefined>(undefined);
+
   const className = styleProp === 'line'
     ? 'border-b-2 border-blue-500 border-opacity-50 focus:border-blue-500 focus:ring-0 focus:border-opacity-100 focus:outline-none'
-    : 'border-2 border-blue-500 border-opacity-50 focus:border-blue-500 focus:ring-0 focus:border-opacity-100 focus:outline-none'
+    : 'border-2 border-blue-500 border-opacity-50 focus:border-blue-500 focus:ring-0 focus:border-opacity-100 focus:outline-none';
 
-  return <input
-    className={className}
-    {...restOfProps}
-  />
-}
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
 
-export default Input
+    // Validar el valor si se proporciona una función de validación
+    if (validate) {
+      const validationError = validate(value);
+      setErrorMessage(validationError);
+    }
+
+    // Actualizar el valor
+    restOfProps.onChange?.(event);
+  };
+
+  return (
+    <div>
+      <input className={className} {...restOfProps} onChange={handleChange} />
+      {errorMessage && <p className="text-red-500">{errorMessage}</p>}
+    </div>
+  );
+};
+
+export default Input;
