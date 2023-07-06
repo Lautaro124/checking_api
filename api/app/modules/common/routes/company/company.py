@@ -1,5 +1,6 @@
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, Form, HTTPException, status
 from sqlalchemy.orm import Session
+from app.modules.common.core.models.company import CompanyBase
 from app.modules.common.core.schemas.companys import Company
 
 from app.modules.common.config.dependences import get_db
@@ -16,14 +17,13 @@ async def get_all_companys(db: Session = Depends(get_db)):
   except Exception as e:
     raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(e))
 
-@router.post('/')
+@router.post('/', response_model=CompanyBase)
 async def add_company(
-    name:str, 
-    description: str,
+    company: CompanyBase = Depends(CompanyBase.as_form),
     db: Session = Depends(get_db),
   ):
   try:
-    company = Company(name=name, description=description)
+    company = Company(name=company.name, description=company.description)
     create_company(company, db)
     return company
   except Exception as e:

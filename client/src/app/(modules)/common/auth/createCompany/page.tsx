@@ -3,22 +3,35 @@ import { type FormEvent } from 'react'
 import InputWithLabel from '~/components/molecules/inputWithLabel'
 import TextAreaWithLabel from '~/components/molecules/textAreaWithLabel'
 import Form from '~/components/organisms/forms'
+import service from '~/service/service'
 
 const CreateCompanyPage = () => {
-  const onSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-    const { companyName, companyDescription } = event.currentTarget
+  const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    try {
+      event.preventDefault()
+      const company = new FormData()
+      const { companyName, companyDescription } = event.currentTarget
 
-    console.log({
-      companyName: companyName.value,
-      companyDescription: companyDescription.value
-    })
+      company.append('name', companyName.value)
+      company.append('description', companyDescription.value)
+      const response = await service({
+        path: '/api/v1/company/',
+        method: 'POST',
+        body: company
+      })
+      console.log(response)
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        throw new Error(error.message)
+      }
+      throw new Error('An unknown error occurred')
+    }
   }
 
   return (
     <section className='p-3 mt-16 '>
       <Form
-        onSubmit={onSubmit}
+        onSubmit={(event) => { void onSubmit(event) }}
         title="Create your company"
         submitText="Create company"
       >

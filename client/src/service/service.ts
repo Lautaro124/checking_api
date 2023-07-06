@@ -12,8 +12,11 @@ const service = async<D>({ path, method, body, headers, config }: ServiceParams)
   const url = `${process.env.NEXT_PUBLIC_REACT_URL_API ?? ''}${path}`
   const response = await fetch(url, {
     method,
-    headers,
-    body: JSON.stringify(body),
+    headers: {
+      accept: 'application/json',
+      ...headers
+    },
+    body,
     ...config
   })
 
