@@ -9,11 +9,7 @@ const CreateCompanyPage = () => {
   const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     try {
       event.preventDefault()
-      const company = new FormData()
-      const { companyName, companyDescription } = event.currentTarget
-
-      company.append('name', companyName.value)
-      company.append('description', companyDescription.value)
+      const company = new FormData(event.currentTarget)
       const response = await service({
         path: '/api/v1/company/',
         method: 'POST',
@@ -39,12 +35,12 @@ const CreateCompanyPage = () => {
           id="comapy"
           label="Company name"
           placeholder='Write your company name here...'
-          name="companyName"
+          name="name"
         />
         <TextAreaWithLabel
           label='Company description'
           placeholder='Write your company description here...'
-          name="companyDescription"
+          name="description"
         />
       </Form>
     </section>

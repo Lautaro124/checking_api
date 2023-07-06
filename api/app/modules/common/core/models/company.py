@@ -21,7 +21,6 @@ class CompanyBase(BaseModel):
     orm_mode = True
     schema_extra = {
         "example": {
-          "id": 1,
           "name": "Company name",
           "description": "Company description"
         }
