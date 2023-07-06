@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, status, HTTPException
 from sqlalchemy.orm import Session
 
 
-from app.core.schemas.type_user import TypeUser
+from app.modules.common.core.schemas.type_user import TypeUser
 from app.modules.common.config.dependences import get_db
 from app.modules.common.controller.type_user import create_type_user, get_all_type_users, get_type_user_by_id
 

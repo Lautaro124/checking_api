@@ -1,4 +1,4 @@
-from app.core.db.database import SessionLocal
+from app.modules.common.core.db.database import SessionLocal
 from passlib.context import CryptContext
 
 def get_db():

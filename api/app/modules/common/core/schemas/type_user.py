@@ -7,5 +7,3 @@ class TypeUser(Base):
 
   id = Column(Integer, primary_key=True, index=True)
   name = Column(String, unique=True)
-
-  user = relationship("User", back_populates="type_user")

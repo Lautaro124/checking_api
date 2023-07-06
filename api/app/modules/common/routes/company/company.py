@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
-from app.core.schemas.companys import Company
+from app.modules.common.core.schemas.companys import Company
 
 from app.modules.common.config.dependences import get_db
 from app.modules.common.controller.company import create_company, get_companys

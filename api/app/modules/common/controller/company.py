@@ -1,6 +1,6 @@
-from app.core.schemas.companys import Company
-from app.core.schemas.user import User
 from sqlalchemy.orm import Session
+
+from app.modules.common.core.schemas.companys import Company
 
 def get_companys(db: Session):
   return db.query(Company).all()

@@ -1,4 +1,4 @@
-from app.core.schemas.user import User
+from app.modules.common.core.schemas.user import User
 from sqlalchemy.orm import Session
 
 def get_all_users(db: Session):

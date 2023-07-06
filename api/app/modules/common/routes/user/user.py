@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 
-from app.core.schemas.user import User
+from app.modules.common.core.schemas.user import User
 from app.modules.common.config.dependences import get_db
 from app.modules.common.controller.company import get_company_by_id
 from app.modules.common.controller.type_user import get_type_user_by_id

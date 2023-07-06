@@ -2,7 +2,9 @@ version: '3'
 
 services:
   web:
-    build: ./client
+    build:
+      context: ./client
+      dockerfile: dockerfile
     env_file:
       - ./client/.env.local
     ports:
@@ -12,9 +14,12 @@ services:
     links:
       - api
   api:
-    build: ./api
+    build:
+      context: ./api
+      dockerfile: dockerfile
+    command: uvicorn app.main:app --reload --host 0.0.0.0 --port 8080
     ports:
-      - 80:80
+      - 8080:8080
     env_file:
       - ./api/.env
     volumes:
@@ -34,3 +39,6 @@ services:
       - ./data:/var/lib/postgresql/data
     ports:
       - 5432:5432
+
+volumes:
+  data:

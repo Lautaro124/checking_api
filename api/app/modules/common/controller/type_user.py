@@ -1,4 +1,4 @@
-from app.core.schemas.type_user import TypeUser
+from app.modules.common.core.schemas.type_user import TypeUser
 from sqlalchemy.orm import Session
 
 def get_all_type_users(db: Session):

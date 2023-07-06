@@ -15,5 +15,5 @@ class User(Base):
   company_id = Column(Integer, ForeignKey("companys.id", ondelete="SET NULL"), nullable=True)
   type_user_id = Column(Integer, ForeignKey("type_users.id", ondelete="SET NULL"), nullable=True, unique=True)
 
-  company = relationship("Company", back_populates="users", uselist=False)
-  type_user = relationship("TypeUser", back_populates="user", uselist=False)
+  company = relationship("Company", uselist=False)
+  type_user = relationship("TypeUser", uselist=False)

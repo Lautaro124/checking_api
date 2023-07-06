@@ -9,7 +9,7 @@ interface ServiceParams {
 }
 
 const service = async<D>({ path, method, body, headers, config }: ServiceParams) => {
-  const url = `http://localhost:3000${path}`
+  const url = `${process.env.NEXT_PUBLIC_REACT_URL_API ?? ''}${path}`
   const response = await fetch(url, {
     method,
     headers,
