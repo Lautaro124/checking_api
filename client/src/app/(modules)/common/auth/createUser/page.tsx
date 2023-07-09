@@ -9,6 +9,7 @@ import service from '~/service/service'
 import { formInputs, validationPassword } from './utils'
 import { COMPANY } from '~/constants/coockiesNames'
 import { ADMINISTRATION } from '~/constants/routes'
+import type { User } from '~/interface/user'
 
 const CreateUser = () => {
   const router = useRouter()
@@ -22,7 +23,7 @@ const CreateUser = () => {
       formData.append('company_name', companyName ?? '')
       formData.append('type_user_id', '1')
 
-      const response = await service({
+      const response = await service<User>({
         path: 'auth/',
         method: 'POST',
         body: formData
@@ -30,7 +31,9 @@ const CreateUser = () => {
       if (response instanceof Error) {
         throw new Error(response.message)
       }
-      // router.push(ADMINISTRATION)
+      if (response.uuid !== undefined) {
+        router.push(ADMINISTRATION)
+      }
     } catch (error: unknown) {
       if (error instanceof Error) {
         throw new Error(error.message)

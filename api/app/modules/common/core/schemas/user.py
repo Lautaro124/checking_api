@@ -7,9 +7,9 @@ class User(Base):
   __tablename__ = 'users'
 
   uuid = Column(UUID(as_uuid=True), primary_key=True, index=True, unique=True)
-  username = Column(String, unique=True)
+  username = Column(String)
   email = Column(String, unique=True)
-  password = Column(String, nullable=True)
+  password = Column(String)
   is_active = Column(Boolean, default=True)
   is_superuser = Column(Boolean, default=False)
   company_id = Column(Integer, ForeignKey("companys.id", ondelete="SET NULL"))
