@@ -3,6 +3,7 @@ import './globals.css'
 import List from '~/components/molecules/list'
 import Link from 'next/link'
 import ItemList from '~/components/atoms/itemList'
+import { CREATE_COMPANY, LOGIN } from '~/constants/routes'
 
 export const metadata = {
   title: 'Create Next App',
@@ -16,11 +17,11 @@ const navItems = [
   },
   {
     name: 'Login',
-    href: '/common/auth/login'
+    href: LOGIN
   },
   {
     name: 'Register',
-    href: '/common/auth/createCompany'
+    href: CREATE_COMPANY
   }
 ]
 

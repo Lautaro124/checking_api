@@ -1,0 +1,5 @@
+export const ADMINISTRATION = '/administration/'
+export const AUTH = '/common/auth/'
+export const CREATE_COMPANY = AUTH + 'createCompany/'
+export const CREATE_USER = AUTH + 'createUser/'
+export const LOGIN = AUTH + 'login/'

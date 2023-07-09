@@ -1,89 +1,66 @@
 'use client'
+import type { ChangeEvent } from 'react'
+import { useRouter } from 'next/navigation'
 
-import InputWithLabel from '~/components/molecules/inputWithLabel';
-import Form from '~/components/organisms/forms';
-import Link from 'next/link';
-import { useState } from 'react';
+import InputWithLabel from '~/components/molecules/inputWithLabel'
+import Form from '~/components/organisms/forms'
+import useForm from '~/hooks/useForm'
+import service from '~/service/service'
+import { formInputs, validationPassword } from './utils'
+import { COMPANY } from '~/constants/coockiesNames'
+import { ADMINISTRATION } from '~/constants/routes'
 
 const CreateUser = () => {
-  const [userName, setUserName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [errors, setErrors] = useState<{ [key: string]: string }>({});
+  const router = useRouter()
+  const { errors, validate, handleSubmit } = useForm({
+    password: validationPassword
+  })
 
-  const validateForm = (event: React.FormEvent) => {
-    event.preventDefault();
+  const onSubmit = async (formData: FormData) => {
+    try {
+      const companyName = localStorage.getItem(COMPANY)
+      formData.append('company_name', companyName ?? '')
+      formData.append('type_user_id', '1')
 
-    const errors: { [key: string]: string } = {};
-
-
-    if (!/^[a-zA-Z]+$/.test(userName)) {
-      errors.userName = 'El nombre solo debe contener letras';
+      const response = await service({
+        path: 'auth/',
+        method: 'POST',
+        body: formData
+      })
+      if (response instanceof Error) {
+        throw new Error(response.message)
+      }
+      // router.push(ADMINISTRATION)
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        throw new Error(error.message)
+      }
+      throw new Error('An unknown error occurred')
     }
-
-    if (!/\S+@\S+\.\S+/.test(email)) {
-      errors.email = 'Ingrese un email válido';
-    }
-
-
-    if (!/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
-      errors.password = 'La contraseña debe contener al menos un caracter especial';
-    }
-
-    setErrors(errors);
-
-    if (Object.keys(errors).length === 0) {
-      // Enviar el formulario
-      
-    }
-  };
+  }
 
   return (
     <section className='p-3 mt-16'>
-      <Form onSubmit={validateForm}>
-        <InputWithLabel
-          id='Usr'
-          label='Name'
-          placeholder='Write your name here...'
-          name='userName'
-          value={userName}
-          onChange={(e) => setUserName(e.target.value)}
-          error={errors.userName}
-        />
-        <InputWithLabel
-          id='emal'
-          label='Email'
-          placeholder='Write your email here...'
-          name='email'
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          error={errors.email}
-        />
-        <InputWithLabel
-          id='password'
-          label='Password'
-          placeholder='Create your password'
-          name='password'
-          type='password'
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          error={errors.password}
-        />
-
-        <button type='submit'>Create User</button>
+      <Form
+        onSubmit={handleSubmit((formData) => { void onSubmit(formData) })}
+        title='Register'
+        submitText='Create your user'
+      >
+        {formInputs.map(input => (
+          <InputWithLabel
+            key={input.id}
+            label={input.label}
+            placeholder={input.placeholder}
+            name={input.name}
+            type={input.type}
+            required={input.reqired}
+            error={errors[input.name]}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => { validate(e.target.name, e.target.value) }}
+          />
+        ))}
       </Form>
-
-      {Object.keys(errors).length > 0 && (
-        <ul className='text-red-500'>
-          {Object.values(errors).map((error, index) => (
-            <li key={index}>{error}</li>
-          ))}
-        </ul>
-      )}
-
-
     </section>
-  );
-};
+  )
+}
 
-export default CreateUser;
+export default CreateUser

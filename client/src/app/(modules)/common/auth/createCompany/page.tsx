@@ -1,21 +1,29 @@
 'use client'
-import { type FormEvent } from 'react'
 import InputWithLabel from '~/components/molecules/inputWithLabel'
 import TextAreaWithLabel from '~/components/molecules/textAreaWithLabel'
 import Form from '~/components/organisms/forms'
 import service from '~/service/service'
+import { useRouter } from 'next/navigation'
+import { CREATE_USER } from '~/constants/routes'
+import { type Company } from '~/interface/company'
+import useForm from '~/hooks/useForm'
+import { COMPANY } from '~/constants/coockiesNames'
 
 const CreateCompanyPage = () => {
-  const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
+  const router = useRouter()
+  const { errors, handleSubmit } = useForm({})
+
+  const onSubmit = async (formData: FormData) => {
     try {
-      event.preventDefault()
-      const company = new FormData(event.currentTarget)
-      const response = await service({
-        path: '/api/v1/company/',
+      const response = await service<Company>({
+        path: 'company/',
         method: 'POST',
-        body: company
+        body: formData
       })
-      console.log(response)
+      if (response !== null || response !== undefined) {
+        localStorage.setItem(COMPANY, response.name)
+        router.push(CREATE_USER)
+      }
     } catch (error: unknown) {
       if (error instanceof Error) {
         throw new Error(error.message)
@@ -27,7 +35,7 @@ const CreateCompanyPage = () => {
   return (
     <section className='p-3 mt-16 '>
       <Form
-        onSubmit={(event) => { void onSubmit(event) }}
+        onSubmit={handleSubmit((formData) => { void onSubmit(formData) })}
         title="Create your company"
         submitText="Create company"
       >
@@ -36,11 +44,16 @@ const CreateCompanyPage = () => {
           label="Company name"
           placeholder='Write your company name here...'
           name="name"
+          required
+          autoFocus
+          error={errors.name}
         />
         <TextAreaWithLabel
           label='Company description'
           placeholder='Write your company description here...'
           name="description"
+          required
+          error={errors.description}
         />
       </Form>
     </section>

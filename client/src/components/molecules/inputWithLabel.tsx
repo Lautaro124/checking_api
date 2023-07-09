@@ -1,22 +1,19 @@
 import Label from '../atoms/label'
 import Input from '../atoms/input'
-import { type InputTypeProp } from '~/interface/inputType'
+import type { InputWithLabelProps } from '~/interface/inputType'
+import Text from '../atoms/text'
 
-export interface InputWithLabelProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  label: string
-  inputType?: InputTypeProp
-}
-
-const InpitWithLabel = ({ inputType, label, ...restOfProps }: InputWithLabelProps) => {
+const InpitWithLabel = ({ inputType, label, error, ...restOfProps }: InputWithLabelProps) => {
   return (
-    <Label
-      label={label}
-    >
-      <Input
-        styleProp={inputType}
-        {...restOfProps}
-      />
-    </Label>
+    <>
+      <Label label={label}>
+        <Input
+          styleProp={inputType}
+          {...restOfProps}
+        />
+      </Label>
+      <Text text={error} />
+    </>
   )
 }
 
