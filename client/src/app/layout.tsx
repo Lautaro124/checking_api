@@ -4,6 +4,7 @@ import List from '~/components/molecules/list'
 import Link from 'next/link'
 import ItemList from '~/components/atoms/itemList'
 import { CREATE_COMPANY, LOGIN } from '~/constants/routes'
+import { Roboto } from 'next/font/google'
 
 export const metadata = {
   title: 'Create Next App',
@@ -24,14 +25,18 @@ const navItems = [
     href: CREATE_COMPANY
   }
 ]
-
+const roboto = Roboto({
+  weight: '400',
+  subsets: ['latin'],
+  display: 'swap',
+})
 export default function RootLayout({
   children
 }: {
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html className={roboto.className} lang="en">
       <body className='w-screen h-screen'>
         <Header title='Home'>
           <List>
