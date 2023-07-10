@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 import uuid
-from app.modules.common.core.models.user import UserModelCreated, UserModelResponse
+from app.modules.common.core.models.user import UserModelCreated, UserLogin
 
 from app.modules.common.core.schemas.user import User
 from app.modules.common.config.dependences import get_db
@@ -12,11 +12,14 @@ from app.modules.common.utils.hash_password import hash_password, verify_passwor
 
 router = APIRouter()
 
-@router.get('/')
-async def login(email: str, password: str, db: Session = Depends(get_db)):
+@router.post('/login')
+async def login(
+    user: UserLogin = Depends(UserLogin.as_form),
+    db: Session = Depends(get_db)
+  ):
   try:
-    user = get_user_by_email(email, db)
-    if verify_password(password, user.password):
+    user_db = get_user_by_email(user.email, db)
+    if verify_password(user.password, user_db.password):
       return user
     else:
       raise Exception('Unaiuthorized user')

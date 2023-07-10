@@ -28,22 +28,20 @@ class UserModelCreated(BaseModel):
   class Config:
     orm_mode = True
 
-class UserModelResponse(BaseModel):
-  uuid: str
-  email: EmailStr
-  is_active: bool
-  company_id: int
-  type_user_id: int
-  username: str
+class UserLogin(BaseModel):
+  email: str = Form(...)
+  password: str = Form(...)
+
+  @classmethod
+  def as_form(
+      cls,
+      email: str = Form(...),
+      password: str = Form(...),
+    ):
+    return cls(
+      email=email,
+      password=password,
+    )
   
   class Config:
-    schema_extra = {
-      "example": {
-          "email": "test@test.com",
-          "uuid": "f692d44f-efda-4501-82f5-b14c35c45a61",
-          "is_active": True,
-          "company_id": 1,
-          "type_user_id": 1,
-          "username": "Nahuel",
-        }
-    }
+    orm_mode = True
