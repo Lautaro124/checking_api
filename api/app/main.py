@@ -25,5 +25,6 @@ app.add_middleware(
   allow_methods=["*"],
   allow_headers=["*"],
 )
-app.include_router(router, prefix="/api/v1")
-app.include_router(logistic_router, prefix="/api/v1/logistic")
+api_v1_path = "/api/v1"
+app.include_router(router, prefix=api_v1_path)
+app.include_router(logistic_router, prefix=api_v1_path)
