@@ -43,8 +43,8 @@ const CreateUser = () => {
   }
 
   return (
-    <section className='p-3 mt-16'>
-      <Form
+    <section className='p-3 mt-16 w-screen items-center justify-items-center'>
+      <Form className='w-[250px]'
         onSubmit={handleSubmit((formData) => { void onSubmit(formData) })}
         title='Register'
         submitText='Create your user'
