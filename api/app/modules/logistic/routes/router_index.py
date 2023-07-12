@@ -1,4 +1,4 @@
-from .deposit import router as deposit_router
+from .deposit.deposit import router as deposit_router
 from fastapi import APIRouter
 
 router = APIRouter()
