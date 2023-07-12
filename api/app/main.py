@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.modules.common.core.db.database import Base, engine
 from app.modules.common.routes.index_routes import router
+from app.modules.logistic.routes.router_index import router as logistic_router
 
 Base.metadata.create_all(bind=engine)
 app = FastAPI(
@@ -25,3 +26,4 @@ app.add_middleware(
   allow_headers=["*"],
 )
 app.include_router(router, prefix="/api/v1")
+app.include_router(logistic_router, prefix="/api/v1/logistic")
