@@ -1,5 +1,5 @@
 import Header from '~/components/molecules/header'
-import './globals.css'
+import '../globals.css'
 import List from '~/components/molecules/list'
 import Link from 'next/link'
 import ItemList from '~/components/atoms/itemList'
@@ -28,8 +28,9 @@ const navItems = [
 const roboto = Roboto({
   weight: '400',
   subsets: ['latin'],
-  display: 'swap',
+  display: 'swap'
 })
+
 export default function RootLayout({
   children
 }: {
@@ -37,7 +38,7 @@ export default function RootLayout({
 }) {
   return (
     <html className={roboto.className} lang="en">
-      <body className='w-screen h-screen'>
+      <body className="h-screen w-screen bg-white dark:bg-black">
         <Header title='Home'>
           <List>
             {navItems.map((item) => (

@@ -4,32 +4,19 @@ services:
   web:
     build:
       context: ./client
-      dockerfile: dockerfile
+      target: runner
     env_file:
       - ./client/.env.local
     volumes:
       - ./client:/app
-    command: >
-      sh -c "yarn install && yarn dev"
+      - /app/node_modules
+    command: npm run dev
     ports:
-      - 3000:3000
+      - "3000:3000"
+    environment:
+      NODE_ENV: development
     links:
       - api
-  api:
-    build:
-      context: ./api
-      dockerfile: dockerfile
-    command: uvicorn app.main:app --reload --host 0.0.0.0 --port 80
-    ports:
-      - 80:80
-    env_file:
-      - ./api/.env
-    volumes:
-      - ./api:/app
-    depends_on:
-      - db
-    links:
-      - db
   db:
     container_name: db_postgres
     image: postgres
@@ -43,6 +30,20 @@ services:
       - ./data:/var/lib/postgresql/data
     ports:
       - 5432:5432
+  api:
+    depends_on:
+      - db
+    build:
+      context: ./api
+      dockerfile: dockerfile
+    ports:
+      - 80:80
+    env_file:
+      - ./api/.env
+    volumes:
+      - ./api:/app
+    links:
+      - db
 
 volumes:
   data:

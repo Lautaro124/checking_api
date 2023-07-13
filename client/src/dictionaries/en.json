@@ -1,0 +1,14 @@
+{
+  "landing": {
+    "title": "Welcome to our advanced logistics application!",
+    "explain": "Our logistics application is a comprehensive solution for efficiently managing your warehouses and associated storage processes. With an intuitive interface and powerful features, we are here to simplify and streamline your logistics operations.",
+    "subtitle": "Key Features:",
+    "firstExplain": "Warehouse Management: You can create and manage multiple warehouses, assign products to specific locations within them, and track inventory levels in real-time. Our application allows you to optimize storage space and minimize management errors.",
+    "secondExplain": "Product Movements: Generate delivery notes to facilitate internal product movements between different locations within your warehouses. You can easily record and track each movement for comprehensive inventory control.",
+    "thirdExplain": "Shipment Management: Organize and coordinate product shipments to your customers efficiently. Our application enables you to record shipment details, generate shipping labels, and track shipments in real-time to ensure successful delivery.",
+    "fortyExplain": "Product Purchases: Place orders for products and maintain a record of your suppliers. You can centrally manage your purchases, monitor delivery times, and ensure that you have the right products in stock.",
+    "fiveExplain": "Administration: Our application also includes a comprehensive administration section. Here, you can manage employee salaries, handle vacation requests, and record purchase and sales receipts. Additionally, you can track dismissals and perform other key administrative tasks.",
+    "sixExplain": "Analysis and Statistics: We provide a variety of charts and visualizations to help you better understand the performance of your logistics operations. You can explore weekly and monthly data to identify trends, pinpoint areas for improvement, and make informed decisions.",
+    "definition": "Our logistics application is an all-encompassing tool to optimize your processes, increase efficiency, and enhance the productivity of your business. Download now and discover how to simplify your logistics management!"
+  }
+}

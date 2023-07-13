@@ -1,11 +1,13 @@
 from app.modules.common.core.schemas.user import User
 from sqlalchemy.orm import Session
+import uuid
 
 def get_all_users(db: Session):
   return db.query(User).all()
 
-def get_user_by_id(id: int, db: Session):
-  return db.query(User).filter(User.id == id).first()
+def get_user_by_id(uuid: str, db: Session):
+  id = uuid.UUID(uuid)
+  return db.query(User).filter(User.uuid == id).first()
 
 def get_user_by_email(email: str, db: Session):
   return db.query(User).filter(User.email == email).first()

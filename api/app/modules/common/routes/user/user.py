@@ -1,3 +1,4 @@
+from app.modules.common.config.auth import create_token
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 import uuid
@@ -18,9 +19,13 @@ async def login(
     db: Session = Depends(get_db)
   ):
   try:
-    user_db = get_user_by_email(user.email, db)
-    if verify_password(user.password, user_db.password):
-      return user
+    db_user = get_user_by_email(user.email, db)
+    if verify_password(user.password, db_user.password):
+      token_data = {
+        'email': str(db_user.email)
+      }
+      token = create_token(token_data)
+      return token
     else:
       raise Exception('Unaiuthorized user')
   except Exception as e:
@@ -46,13 +51,11 @@ async def register(
       is_superuser=False,
     )
     db_user = create_user(user, db)
-    return {
-      'uuid': db_user.uuid,
-      'email': db_user.email,
-      'is_active': db_user.is_active,
-      'company_id': db_user.company_id,
-      'type_user_id': db_user.type_user_id,
-      'username': db_user.username,
+    token_data = {
+      'email': db_user.email
     }
+    token = create_token(token_data)
+    return token
+    
   except Exception as e:
     raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(e))

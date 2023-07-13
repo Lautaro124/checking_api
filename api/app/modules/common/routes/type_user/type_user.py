@@ -1,3 +1,5 @@
+from app.modules.common.config.auth import verify_token
+from app.modules.common.core.schemas.user import User
 from fastapi import APIRouter, Depends, status, HTTPException
 from sqlalchemy.orm import Session
 
@@ -9,8 +11,16 @@ from app.modules.common.controller.type_user import create_type_user, get_all_ty
 router = APIRouter()
 
 @router.get('/')
-async def get_type_users(db: Session = Depends(get_db)):
+async def get_type_users(
+    token: User = Depends(verify_token),
+    db: Session = Depends(get_db)
+  ):
   try:
+    if not token.is_superuser :
+      raise HTTPException(
+        status_code=status.HTTP_401_UNAUTHORIZED, 
+        detail="You don't have permission to do this"
+        )
     type_users = get_all_type_users(db)
     return type_users
   except Exception as e:

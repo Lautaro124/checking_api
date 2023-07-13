@@ -1,7 +1,6 @@
-export const background="#292C3E"
-export const butons='#3075FA'
-export const sections='#2F3247'
-export const text='#E8E8EB'
-export const secundaryButtons='#828282'
-export const ligthText= '#707578'
-export const ligthStrongText='#3A444A'
+export const background = 'bg-[#FFFFFF] dark:bg-[#292C3E]'
+export const textColor = 'text-[#707578] dark:text-[#E8E8EB]'
+export const butons = 'bg-[#3075FA]'
+export const sections = 'bg-[#2F3247]'
+export const secundaryButtons = 'bg-[#828282]'
+export const ligthStrongText = 'text-[#3A444A]'
