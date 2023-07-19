@@ -1,10 +1,16 @@
+import './globals.css'
 import Header from '~/components/molecules/header'
-import '../globals.css'
 import List from '~/components/molecules/list'
 import Link from 'next/link'
 import ItemList from '~/components/atoms/itemList'
 import { CREATE_COMPANY, LOGIN } from '~/constants/routes'
 import { Roboto } from 'next/font/google'
+import { type Params } from '~/interface/params'
+import { defaultLocale } from '../middleware'
+
+export async function generateStaticParams() {
+  return [{ lang: 'en' }, { lang: 'es' }]
+}
 
 export const metadata = {
   title: 'Create Next App',
@@ -25,20 +31,21 @@ const navItems = [
     href: CREATE_COMPANY
   }
 ]
+
 const roboto = Roboto({
   weight: '400',
   subsets: ['latin'],
   display: 'swap'
 })
 
-export default function RootLayout({
-  children
-}: {
+interface RootLayoutProps extends Params {
   children: React.ReactNode
-}) {
+}
+
+export default function RootLayout({ children, params: { lang } }: RootLayoutProps) {
   return (
-    <html className={roboto.className} lang="en">
-      <body className="h-screen w-screen bg-white dark:bg-black">
+    <html className={roboto.className} lang={lang ?? defaultLocale}>
+      <body className="h-screen w-screen bg-[#FFFFFF] dark:bg-[#292C3E]">
         <Header title='Home'>
           <List>
             {navItems.map((item) => (

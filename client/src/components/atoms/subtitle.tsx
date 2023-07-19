@@ -1,12 +1,10 @@
-import { textColor } from '~/constants/colors'
-
 interface SubtitleProps extends React.HTMLAttributes<HTMLHeadingElement> {
   text: string
 }
 
 const Subtitle = ({ text }: SubtitleProps) => {
   return (
-    <h2 className={`text-xl font-bold ${textColor}`}>
+    <h2 className='text-xl font-bold text-black dark:text-white'>
       {text}
     </h2>
   )

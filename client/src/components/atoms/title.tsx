@@ -1,10 +1,8 @@
-import { textColor } from '~/constants/colors'
-
 interface TitleProps extends React.HTMLAttributes<HTMLHeadingElement> {
   text: string
 }
 const Title = ({ text }: TitleProps) => {
-  return <h1 className={`text-2xl font-bold text-start ${textColor}`}>
+  return <h1 className='text-2xl font-bold text-start text-black dark:text-white'>
     {text}
   </h1>
 }
