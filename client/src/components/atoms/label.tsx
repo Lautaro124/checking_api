@@ -1,5 +1,3 @@
-import { textColor } from '~/constants/colors'
-
 interface LabelProps extends React.LabelHTMLAttributes<HTMLLabelElement> {
   children: React.ReactNode
   label: string
@@ -8,7 +6,7 @@ interface LabelProps extends React.LabelHTMLAttributes<HTMLLabelElement> {
 const Label = ({ children, label, ...restOfProps }: LabelProps) => {
   return (
     <label
-      className={`text-sm font-bold mb-2 flex flex-col ${textColor}`}
+      className='text-sm font-bold flex flex-col  text-[#707578] dark:text-[#E8E8EB]'
       {...restOfProps}
     >
       {label}

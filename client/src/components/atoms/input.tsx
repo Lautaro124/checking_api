@@ -1,15 +1,11 @@
-import { type InputTypeProp } from '~/interface/inputType'
-
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  styleProp?: InputTypeProp
 }
 
-const Input = ({ styleProp, ...restOfProps }: InputProps) => {
-  const className = styleProp === 'line'
-    ? 'border-b-2 border-blue-500 border-opacity-50 focus:border-blue-500 focus:ring-0 focus:border-opacity-100 focus:outline-none'
-    : 'border-2 border-blue-500 border-opacity-50 focus:border-blue-500 focus:ring-0 focus:border-opacity-100 focus:outline-none'
-
-  return <input className={className} {...restOfProps} />
+const Input = ({ ...restOfProps }: InputProps) => {
+  return <input
+    className='py-2 px-4 rounded-md border border-[rgba(0, 0, 0, 0.05)] dark:border-[rgba(255, 255, 255, 0.85)] selection:bg-blue-900 bg-transparent focus:border-[#0185FE] focus:outline-none'
+    {...restOfProps}
+  />
 }
 
 export default Input

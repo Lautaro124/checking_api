@@ -7,10 +7,7 @@ const InpitWithLabel = ({ inputType, label, error, ...restOfProps }: InputWithLa
   return (
     <>
       <Label label={label}>
-        <Input
-          styleProp={inputType}
-          {...restOfProps}
-        />
+        <Input {...restOfProps} />
       </Label>
       <Text text={error ?? ''} />
     </>

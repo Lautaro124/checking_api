@@ -1,4 +1,5 @@
 'use client'
+import CheckButton from '~/components/molecules/checkButton'
 import InputWithLabel from '~/components/molecules/inputWithLabel'
 import Form from '~/components/organisms/forms'
 import useForm from '~/hooks/useForm'
@@ -46,12 +47,7 @@ const LoginPage = () => {
           type="password"
           required
         />
-        <InputWithLabel
-          label="Save user"
-          placeholder="Save user"
-          name="saveUser"
-          type="checkbox"
-        />
+        <CheckButton label="Remember me" name="remember" />
       </Form>
     </section>
   )

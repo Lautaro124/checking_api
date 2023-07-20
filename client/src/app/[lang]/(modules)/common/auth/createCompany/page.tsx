@@ -8,6 +8,7 @@ import { CREATE_USER } from '~/constants/routes'
 import { type Company } from '~/interface/company'
 import useForm from '~/hooks/useForm'
 import { COMPANY } from '~/constants/coockiesNames'
+import Card from '~/components/atoms/card'
 
 const CreateCompanyPage = () => {
   const router = useRouter()
@@ -34,28 +35,30 @@ const CreateCompanyPage = () => {
 
   return (
     <section className='p-3 mt-16 '>
-      <Form
-        onSubmit={handleSubmit((formData) => { void onSubmit(formData) })}
-        title="Create your company"
-        submitText="Create company"
-      >
-        <InputWithLabel
-          id="comapy"
-          label="Company name"
-          placeholder='Write your company name here...'
-          name="name"
-          required
-          autoFocus
-          error={errors.name}
-        />
-        <TextAreaWithLabel
-          label='Company description'
-          placeholder='Write your company description here...'
-          name="description"
-          required
-          error={errors.description}
-        />
-      </Form>
+      <Card>
+        <Form
+          onSubmit={handleSubmit((formData) => { void onSubmit(formData) })}
+          title="Create your company"
+          submitText="Create company"
+        >
+          <InputWithLabel
+            id="comapy"
+            label="Company name"
+            placeholder='Write your company name here...'
+            name="name"
+            required
+            autoFocus
+            error={errors.name}
+          />
+          <TextAreaWithLabel
+            label='Company description'
+            placeholder='Write your company description here...'
+            name="description"
+            required
+            error={errors.description}
+          />
+        </Form>
+      </Card>
     </section>
   )
 }

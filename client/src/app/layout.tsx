@@ -45,7 +45,7 @@ interface RootLayoutProps extends Params {
 export default function RootLayout({ children, params: { lang } }: RootLayoutProps) {
   return (
     <html className={roboto.className} lang={lang ?? defaultLocale}>
-      <body className="h-screen w-screen bg-[#FFFFFF] dark:bg-[#292C3E]">
+      <body className="h-screen w-screen bg-[#FFFFFF] dark:bg-[#000]">
         <Header title='Home'>
           <List>
             {navItems.map((item) => (

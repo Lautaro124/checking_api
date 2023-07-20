@@ -1,16 +1,9 @@
-import { type InputTypeProp } from '~/interface/inputType'
-
 interface TextAreaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
-  typeStyle?: InputTypeProp
 }
 
-const TextArea = ({ typeStyle, ...restOfProps }: TextAreaProps) => {
-  const className = typeStyle === 'line'
-    ? 'border-b-2 border-blue-500 border-opacity-50 focus:border-blue-500 focus:ring-0 focus:border-opacity-100 focus:outline-none'
-    : 'border-2 border-blue-500 border-opacity-50 focus:border-blue-500 focus:ring-0 focus:border-opacity-100 focus:outline-none'
-
+const TextArea = ({ ...restOfProps }: TextAreaProps) => {
   return <textarea
-    className={className}
+    className='py-2 px-4 rounded-md border border-[rgba(0, 0, 0, 0.05)] dark:border-[rgba(255, 255, 255, 0.85)] selection:bg-blue-900 bg-transparent focus:border-[#0185FE] focus:outline-none'
     {...restOfProps}
   />
 }
