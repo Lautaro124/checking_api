@@ -18,7 +18,7 @@ services:
     links:
       - api
   db:
-    container_name: db_postgres
+    container_name: gestion_db
     image: postgres
     restart: always
     environment:

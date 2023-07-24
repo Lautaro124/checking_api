@@ -29,6 +29,10 @@ const navItems = [
   {
     name: 'Register',
     href: CREATE_COMPANY
+  },
+  {
+    name: 'Add storage',
+    href: '/logistic/addDeposit'
   }
 ]
 
@@ -45,7 +49,7 @@ interface RootLayoutProps extends Params {
 export default function RootLayout({ children, params: { lang } }: RootLayoutProps) {
   return (
     <html className={roboto.className} lang={lang ?? defaultLocale}>
-      <body className="h-screen w-screen bg-[#FFFFFF] dark:bg-[#000]">
+      <body className="h-screen w-screen bg-[#FFFFFF] dark:bg-[#151515]">
         <Header title='Home'>
           <List>
             {navItems.map((item) => (

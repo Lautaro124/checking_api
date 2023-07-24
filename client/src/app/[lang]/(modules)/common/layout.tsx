@@ -1,12 +1,10 @@
-interface CommonLayoutProps {
-  children: React.ReactNode
-}
+import GenerateLayout, { type GenerateLayoutProps } from '~/components/atoms/generateLayout'
 
-const CommonLayout = ({ children }: CommonLayoutProps) => {
+const CommonLayout = ({ children }: GenerateLayoutProps) => {
   return (
-    <main className="w-screen h-max">
+    <GenerateLayout>
       {children}
-    </main>
+    </GenerateLayout>
   )
 }
 

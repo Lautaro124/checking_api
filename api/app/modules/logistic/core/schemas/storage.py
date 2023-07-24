@@ -1,7 +1,8 @@
-from sqlalchemy import Column, String,ForeignKey
+from sqlalchemy import Column, String, ForeignKey
 from ....common.core.db.database import Base
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import relationship
+
 
 class Storage(Base):
     __tablename__ = 'storages'
@@ -11,5 +12,7 @@ class Storage(Base):
     location = Column(String, unique=False)
     description = Column(String)
     products_id = Column(UUID, ForeignKey('products.uuid'))
+    deposits_id = Column(UUID, ForeignKey('deposits.uuid'))
 
     products = relationship("Product")
+    deposits = relationship("Deposit")

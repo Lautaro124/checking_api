@@ -40,5 +40,5 @@ export const validationPassword = (value: string) => {
   if (!/[A-Z]/.test(value)) {
     message.push('Password must contain at least one uppercase letter')
   }
-  return message.length !== 0 ? message.join(', ').replace(/, ([^,]*)$/, ' and $1') : ''
+  return message.length !== 0 ? message.join(', \n').replace(/, ([^,]*)$/, ' and $1') : ''
 }

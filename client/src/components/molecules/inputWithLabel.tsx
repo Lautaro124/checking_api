@@ -9,7 +9,7 @@ const InpitWithLabel = ({ inputType, label, error, ...restOfProps }: InputWithLa
       <Label label={label}>
         <Input {...restOfProps} />
       </Label>
-      <Text text={error ?? ''} />
+      <Text text={error ?? ''} isError />
     </>
   )
 }
