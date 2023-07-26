@@ -1,19 +1,21 @@
 import React from 'react'
 import Cell from '../atoms/cell'
-import type { ColumTypeProp, DataTypeProp } from '~/interface/tableTypes'
+import type { DataTypeProp } from '~/interface/tableTypes'
+import Text from '../atoms/text'
 
 interface TableBodyProps {
-  data: DataTypeProp
-  columns: ColumTypeProp
+  data: DataTypeProp[]
 }
 
-const TableBody = ({ data, columns }: TableBodyProps) => {
+const TableBody = ({ data }: TableBodyProps) => {
   return (
     <tbody>
-      {data.map((row) => (
-        <tr key={row.id}>
-          {columns.map((column) => (
-            <Cell key={column.id}>{row[column.id]}</Cell>
+      {data.map(({ id, cells }) => (
+        <tr key={id}>
+          {cells.map((cell, index) => (
+            <Cell key={index}>
+              <Text text={cell} />
+            </Cell>
           ))}
         </tr>
       ))}

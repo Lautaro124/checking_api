@@ -1,16 +1,18 @@
-import { type ColumTypeProp } from '~/interface/tableTypes'
 import HeaderCell from '../atoms/headerCell'
+import Subtitle from '../atoms/subtitle'
 
 interface TableHeadProps {
-  columns: ColumTypeProp
+  columns: string[]
 }
 
 const TableHead = ({ columns }: TableHeadProps) => {
   return (
-    <thead>
-      <tr>
-        {columns.map((column) => (
-          <HeaderCell key={column.id}>{column.label}</HeaderCell>
+    <thead className=''>
+      <tr className=''>
+        {columns.map((column, index) => (
+          <HeaderCell key={index}>
+            <Subtitle text={column} />
+          </HeaderCell>
         ))}
       </tr>
     </thead>

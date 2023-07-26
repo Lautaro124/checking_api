@@ -2,11 +2,21 @@
 
 import InputWithLabel from '~/components/molecules/inputWithLabel'
 import Form from '~/components/organisms/forms'
+import { useRouter } from 'next/navigation'
 
 const AddStoragePage = () => {
+  const router = useRouter()
+
+  const navigate = () => {
+    router.push('/logistic/dashboard')
+  }
+
   return (
     <section className='pt-4 px-4'>
-      <Form title="Add storage" submitText="Add">
+      <Form title="Add deposit" submitText="Add" onSubmit={(event) => {
+        event.preventDefault()
+        navigate()
+      }}>
         <InputWithLabel
           label="Name"
           name="name"
@@ -45,6 +55,7 @@ const AddStoragePage = () => {
         <InputWithLabel
           label="Contact email"
           name="contactEmail"
+          type='email'
           required
         />
       </Form>

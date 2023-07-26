@@ -1,7 +1,10 @@
-export type DataTypeProp = Array<{
+export interface DataTypeProp {
   id: string
-  [key: string]: React.ReactNode
-}>
+  cells: string[]
+  typeCell: TypeCell
+}
+export type TypeCell = 'text' | 'number' | 'date' | 'select' | 'checkbox'
+
 export type ColumTypeProp = Array<{
   id: string
   label: string
